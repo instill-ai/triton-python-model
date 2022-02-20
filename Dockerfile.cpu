@@ -1,0 +1,15 @@
+FROM continuumio/miniconda3 AS build
+
+RUN conda create --name triton-conda-env python=3.8 scikit-learn pytorch torchvision cpuonly -c conda-forge -c pytorch
+
+# Install conda-pack
+RUN conda install conda-pack
+
+#  conda pack
+RUN conda pack -n triton-conda-env -o python-3-8.tar.gz
+
+FROM busybox AS runtime
+
+WORKDIR /conda-pack
+
+COPY --from=build /python-3-8.tar.gz ./
