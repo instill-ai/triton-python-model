@@ -1,0 +1,16 @@
+# Preparing conda-pack for the Triton paython-backend extension
+FROM continuumio/miniconda3 AS build
+
+RUN conda create --name triton-conda-env python=3.8 -c pytorch pytorch torchvision -c conda-forge scikit-learn
+
+# Install conda-pack
+RUN conda install conda-pack
+
+#  conda pack
+RUN conda pack -n triton-conda-env -o python-3-8.tar.gz
+
+FROM busybox AS runtime
+
+WORKDIR /conda-pack
+
+COPY --from=build /python-3-8.tar.gz ./
