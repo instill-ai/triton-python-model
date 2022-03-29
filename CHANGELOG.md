@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.2.1-alpha](https://github.com/instill-ai/triton-python-model/compare/v0.2.0-alpha...v0.2.1-alpha) (2022-03-29)
+
+
+### Bug Fixes
+
+* rename the task model classes ([c59adac](https://github.com/instill-ai/triton-python-model/commit/c59adac989cb21b1c38dd924566fc5d29509ba9d))
+
 ## [0.2.0-alpha](https://github.com/instill-ai/triton-conda-env/compare/v0.1.0-alpha...v0.2.0-alpha) (2022-03-29)
 
 
