@@ -1,6 +1,18 @@
 FROM continuumio/miniconda3 AS build
 
-RUN conda create --name triton-conda-env python=3.8 scikit-learn pytorch torchvision cpuonly -c conda-forge -c pytorch
+ARG PYTHONNOUSERSITE=True
+
+RUN conda create --name triton-conda-env python=3.8 scikit-learn pillow pytorch torchvision cpuonly -c conda-forge -c pytorch
+
+# Instill triton-python-model
+ARG TRITON_PYTHON_MODEL_VERSION
+ADD /triton_python_model /tmp/triton_python_model
+ADD requirements.txt /tmp/
+ADD setup.py /tmp/
+RUN conda run -n triton-conda-env \
+  python -m pip install -r /tmp/requirements.txt
+RUN conda run -n triton-conda-env \
+  python -m pip install --no-deps /tmp
 
 # Install conda-pack
 RUN conda install conda-pack
