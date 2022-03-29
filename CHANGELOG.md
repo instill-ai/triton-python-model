@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0-alpha](https://github.com/instill-ai/triton-conda-env/compare/v0.1.0-alpha...v0.2.0-alpha) (2022-03-29)
+
+
+### Features
+
+* add triton-python-model library in conda environment ([#4](https://github.com/instill-ai/triton-conda-env/issues/4)) ([8cab8ef](https://github.com/instill-ai/triton-conda-env/commit/8cab8ef226c27dd8601651add61f07e1ce8816c3))
+
 ## [0.1.0-alpha](https://github.com/instill-ai/triton-conda-env/compare/v0.0.0-alpha...v0.1.0-alpha) (2022-02-20)
 
 
