@@ -1,18 +1,20 @@
-name: Add PR to project
+name: Add PR to Project
 
 on:
   pull_request:
     types:
+      - opened
       - ready_for_review
 jobs:
   track_pr:
     runs-on: ubuntu-latest
+    if: ${{ !github.event.pull_request.draft }}
     steps:
       - name: Get project data
         env:
           GITHUB_TOKEN: ${{ secrets.botGitHubToken }}
           ORGANIZATION: instill-ai
-          PROJECT_NUMBER: 5  # Visual Datat Preparation (VDP) project
+          PROJECT_NUMBER: 5  # Visual Data Preparation (VDP) project
         run: |
           gh api graphql -f query='
             query($org: String!, $number: Int!) {
