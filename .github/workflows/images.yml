@@ -26,6 +26,7 @@ jobs:
           push: true
           file: Dockerfile.cpu
           tags: instill/triton-conda-env:${{ github.ref_name }}-cpu
+          build-args: TRITON_PYTHON_MODEL_VERSION=${{ github.ref_name }}
           cache-from: type=registry,ref=instill/triton-conda-env:buildcache-cpu
           cache-to: type=registry,ref=instill/triton-conda-env:buildcache-cpu,mode=max
       - name: Build and push GPU image
@@ -35,5 +36,6 @@ jobs:
           push: true
           file: Dockerfile.gpu
           tags: instill/triton-conda-env:latest,instill/triton-conda-env:${{ github.ref_name }}-gpu
+          build-args: TRITON_PYTHON_MODEL_VERSION=${{ github.ref_name }}
           cache-from: type=registry,ref=instill/triton-conda-env:buildcache-gpu
           cache-to: type=registry,ref=instill/triton-conda-env:buildcache-gpu,mode=max
