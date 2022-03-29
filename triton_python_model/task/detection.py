@@ -6,7 +6,7 @@ import triton_python_backend_utils as pb_utils
 import triton_python_model.utils as utils
 
 
-class DetectionModel(ABC):
+class PostDetectionModel(ABC):
     def __init__(self, input_names: List[str], output_names: List[str]) -> None:
         """Constructor function
 
