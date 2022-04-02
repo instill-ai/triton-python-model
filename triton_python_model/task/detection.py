@@ -37,13 +37,13 @@ class PostDetectionModel(ABC):
         """`initialize` is called only once when the model is being loaded. Implementing `initialize` function is optional. This function allows the model to initialize any state associated with this model.
 
         Args:
-            args (Dict[str, str]): Both keys and values are strings. The dictionary keys and values are:
-                * model_config: A JSON string containing the model configuration
-                * model_instance_kind: A string containing model instance kind
-                * model_instance_device_id: A string containing model instance device ID
-                * model_repository: Model repository path
-                * model_version: Model version
-                * model_name: Model name
+            args (Dict[str, str]): both keys and values are strings. The dictionary keys and values are:
+                * model_config: a JSON string containing the model configuration
+                * model_instance_kind: a string containing model instance kind
+                * model_instance_device_id: a string containing model instance device ID
+                * model_repository: model repository path
+                * model_version: model version
+                * model_name: model name
         """
         # Read config file
         model_config = json.loads(args['model_config'])
@@ -81,10 +81,10 @@ class PostDetectionModel(ABC):
         """`execute` must be implemented in every Python model. `execute` function receives a list of pb_utils.InferenceRequest as the only argument. This function is called when an inference is requested for this model.
 
         Args:
-            inference_requests (List[pb_utils.InferenceRequest]): A list of Triton Inference Request
+            inference_requests (List[pb_utils.InferenceRequest]): a list of Triton Inference Request
 
         Returns:
-            List[pb_utils.InferenceResponse]: A list of Triton Inference Response. The length of this list must
+            List[pb_utils.InferenceResponse]: a list of Triton Inference Response. The length of this list must
             be the same as `inference_requests`
         """
         responses = []
@@ -118,15 +118,15 @@ class PostDetectionModel(ABC):
         """Post-process objects detected in one image of a batch.
 
         Args:
-            inputs (Tuple[np.ndarray]): Input array for detected objects in one image
+            inputs (Tuple[np.ndarray]): a sequence of model input array for one image
 
         Raises:
             NotImplementedError: all subclasses must implement this function of per-image post-processing for `DETECTION` task.
 
         Returns:
-            Tuple[np.ndarray, np.ndarray]: a tuple of bounding box array and label array: (`bboxes`, `labels`).
-                - `bboxes`: the bounding boxes detected in one image of a batch with shape (n,5) or (0,). The bounding box format is [x1, y1, x2, y2, score] in the original image.
-                - `labels`: the labels corresponding to the bounding boxes detected in one image of a batch with shape (n,) or (0,).
+            Tuple[np.ndarray, np.ndarray]: a tuple of bounding box with label array: (`bboxes`, `labels`).
+                - `bboxes`: the bounding boxes detected in this image with shape (n,5) or (0,). The bounding box format is [x1, y1, x2, y2, score] in the original image. `n` is the number of bounding boxes detected in this image.
+                - `labels`: the labels corresponding to the bounding boxes with shape (n,) or (0,).
                 The length of `bboxes` must be the same as that of `labels`.
         """
         raise NotImplementedError(
@@ -142,7 +142,7 @@ class PostDetectionModel(ABC):
 
         Returns:
             Tuple[np.ndarray, np.ndarray]: a Tuple of batched bounding box array and label array: (`batch_boxes`, `batch_labels`).
-                - `batch_boxes`: the shape of batched bounding box array should be (batch_size, n, 5).
+                - `batch_boxes`: the shape of batched bounding box array should be (batch_size, n, 5). `n` is the maximum number of bounding boxes detected in any image of this batch.
                 - `batch_labels`: the shape of batched label array should be (batch_size, n).
         """
         inputs_list = []

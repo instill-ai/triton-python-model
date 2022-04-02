@@ -32,13 +32,13 @@ class PostClassificationModel(ABC):
         """`initialize` is called only once when the model is being loaded. Implementing `initialize` function is optional. This function allows the model to initialize any state associated with this model.
 
         Args:
-            args (Dict[str, str]): Both keys and values are strings. The dictionary keys and values are:
-                * model_config: A JSON string containing the model configuration
-                * model_instance_kind: A string containing model instance kind
-                * model_instance_device_id: A string containing model instance device ID
-                * model_repository: Model repository path
-                * model_version: Model version
-                * model_name: Model name
+            args (Dict[str, str]): both keys and values are strings. The dictionary keys and values are:
+                * model_config: a JSON string containing the model configuration
+                * model_instance_kind: a string containing model instance kind
+                * model_instance_device_id: a string containing model instance device ID
+                * model_repository: model repository path
+                * model_version: model version
+                * model_name: model name
         """
         # Read config file
         model_config = json.loads(args['model_config'])
@@ -71,10 +71,10 @@ class PostClassificationModel(ABC):
         """`execute` must be implemented in every Python model. `execute` function receives a list of pb_utils.InferenceRequest as the only argument. This function is called when an inference is requested for this model.
 
         Args:
-            inference_requests (List[pb_utils.InferenceRequest]): A list of Triton Inference Request
+            inference_requests (List[pb_utils.InferenceRequest]): a list of Triton Inference Request
 
         Returns:
-            List[pb_utils.InferenceResponse]: A list of Triton Inference Response. The length of this list must
+            List[pb_utils.InferenceResponse]: a list of Triton Inference Response. The length of this list must
             be the same as `inference_requests`
         """
         responses = []
@@ -106,13 +106,13 @@ class PostClassificationModel(ABC):
         """Post-process classification output in one image of a batch.
 
         Args:
-            inputs (Tuple[np.ndarray]): Input array for detected objects in one image
+            inputs (Tuple[np.ndarray]): a sequence of model input array for one image
 
         Raises:
             NotImplementedError: all subclasses must implement this function of per-image post-processing for `CLASSIFICATION` task.
 
         Returns:
-            np.ndarray: classification score array for one image `scores`. The shape of `scores` should be (n,), where n is the number of categories.
+            np.ndarray: classification score array `scores` for this image. The shape of `scores` should be (n,), where n is the number of categories.
         """
         raise NotImplementedError(
             f'Implement per-image inference function for {self.task} model')
