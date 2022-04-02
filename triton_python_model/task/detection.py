@@ -14,7 +14,7 @@ class PostDetectionModel(ABC):
             input_names (List[str]): a list of model input variable names in the model configuration
             output_names (List[str]): a list of model output variable names in the model configuration
         """
-        self.task = 'TASK_DETECTION'
+        self.task = 'DETECTION'
         self.input_names = input_names
         self.output_names = output_names
 
@@ -52,7 +52,7 @@ class PostDetectionModel(ABC):
         utils.validate_model_config(
             model_config, self.input_names, self.output_names)
 
-        # Validate model configuration for TASK_DETECTION task
+        # Validate model configuration for `DETECTION` task
         # 1. The first output: bounding boxes output with dim [-1, 5] and TYPE_FP32
         bbox_config = pb_utils.get_output_config_by_name(
             model_config, name=self.bbox_output_config["name"])
@@ -121,7 +121,7 @@ class PostDetectionModel(ABC):
             inputs (Tuple[np.ndarray]): Input array for detected objects in one image
 
         Raises:
-            NotImplementedError: all subclasses must implement this function of per-image post-processing for TASK_DETECTION task.
+            NotImplementedError: all subclasses must implement this function of per-image post-processing for `DETECTION` task.
 
         Returns:
             Tuple[np.ndarray, np.ndarray]: a tuple of bounding box array and label array: (`bboxes`, `labels`).

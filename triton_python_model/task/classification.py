@@ -14,7 +14,7 @@ class PostClassificationModel(ABC):
             input_names (List[str]): a list of model input variable names in the model configuration
             output_names (List[str]): a list of model output variable names in the model configuration
         """
-        self.task = 'TASK_CLASSIFICATION'
+        self.task = 'CLASSIFICATION'
         self.input_names = input_names
         self.output_names = output_names
 
@@ -109,7 +109,7 @@ class PostClassificationModel(ABC):
             inputs (Tuple[np.ndarray]): Input array for detected objects in one image
 
         Raises:
-            NotImplementedError: all subclasses must implement this function of per-image post-processing for TASK_CLASSIFICATION task.
+            NotImplementedError: all subclasses must implement this function of per-image post-processing for `CLASSIFICATION` task.
 
         Returns:
             np.ndarray: classification score array for one image `scores`. The shape of `scores` should be (n,), where n is the number of categories.
