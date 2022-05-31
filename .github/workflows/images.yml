@@ -1,6 +1,9 @@
 name: Build and Push Images
 
 on:
+  push:
+    branches:
+      - main
   release:
     types: [published]
 
@@ -13,29 +16,74 @@ jobs:
         with:
           username: dropletbot
           password: ${{ secrets.botDockerHubPassword }}
+
       - name: Set up Docker Buildx for CPU image
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v2
         id: builder-cpu
+
       - name: Set up Docker Buildx for GPU image
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v2
         id: builder-gpu
-      - name: Build and push CPU image
-        uses: docker/build-push-action@v2
+
+      - uses: actions/checkout@v3
+
+      - name: Get latest tag
+        uses: actions-ecosystem/action-get-latest-tag@v1
+        id: get-latest-tag
+
+      - name: Build and push CPU image (latest)
+        uses: docker/build-push-action@v3
         with:
           builder: ${{ steps.builder-cpu.outputs.name }}
           push: true
           file: Dockerfile.cpu
-          tags: instill/triton-conda-env:${{ github.ref_name }}-cpu
-          build-args: TRITON_PYTHON_MODEL_VERSION=${{ github.ref_name }}
+          tags: instill/triton-conda-env:latest-cpu
+          build-args: TRITON_PYTHON_MODEL_VERSION=${{steps.get-latest-tag.outputs.tag}}+dev
           cache-from: type=registry,ref=instill/triton-conda-env:buildcache-cpu
           cache-to: type=registry,ref=instill/triton-conda-env:buildcache-cpu,mode=max
-      - name: Build and push GPU image
-        uses: docker/build-push-action@v2
+
+      - name: Build and push GPU image (latest)
+        uses: docker/build-push-action@v3
         with:
           builder: ${{ steps.builder-gpu.outputs.name }}
           push: true
           file: Dockerfile.gpu
-          tags: instill/triton-conda-env:latest,instill/triton-conda-env:${{ github.ref_name }}-gpu
-          build-args: TRITON_PYTHON_MODEL_VERSION=${{ github.ref_name }}
+          tags: instill/triton-conda-env:latest-gpu
+          build-args: TRITON_PYTHON_MODEL_VERSION=${{steps.get-latest-tag.outputs.tag}}+dev
+          cache-from: type=registry,ref=instill/triton-conda-env:buildcache-gpu
+          cache-to: type=registry,ref=instill/triton-conda-env:buildcache-gpu,mode=max
+
+      - name: Set Versions
+        if: github.event_name == 'release'
+        uses: actions/github-script@v6
+        id: set_version
+        with:
+          script: |
+            const tag = '${{ github.ref_name }}'
+            const no_v_tag = tag.replace('v', '')
+            core.setOutput('tag', tag)
+            core.setOutput('no_v_tag', no_v_tag)
+
+      - name: Build and push CPU image (release)
+        if: github.event_name == 'release'
+        uses: docker/build-push-action@v3
+        with:
+          builder: ${{ steps.builder-cpu.outputs.name }}
+          push: true
+          file: Dockerfile.cpu
+          tags: instill/triton-conda-env:${{steps.set_version.outputs.no_v_tag}}-cpu
+          build-args: TRITON_PYTHON_MODEL_VERSION=${{steps.set_version.outputs.tag}}
+          cache-from: type=registry,ref=instill/triton-conda-env:buildcache-cpu
+          cache-to: type=registry,ref=instill/triton-conda-env:buildcache-cpu,mode=max
+
+      - name: Build and push GPU image (release)
+        if: github.event_name == 'release'
+        uses: docker/build-push-action@v3
+        with:
+          builder: ${{ steps.builder-gpu.outputs.name }}
+          push: true
+          file: Dockerfile.gpu
+          tags: instill/triton-conda-env:${{steps.set_version.outputs.no_v_tag}}-gpu
+          build-args: TRITON_PYTHON_MODEL_VERSION=${{steps.set_version.outputs.tag}}
           cache-from: type=registry,ref=instill/triton-conda-env:buildcache-gpu
           cache-to: type=registry,ref=instill/triton-conda-env:buildcache-gpu,mode=max

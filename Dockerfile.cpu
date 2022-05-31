@@ -5,7 +5,7 @@ ARG PYTHONNOUSERSITE=True
 RUN conda create --name triton-conda-env python=3.8 scikit-learn pillow pytorch torchvision cpuonly -c conda-forge -c pytorch
 
 # Instill triton-python-model
-ARG TRITON_PYTHON_MODEL_VERSION=dev
+ARG TRITON_PYTHON_MODEL_VERSION
 ADD /triton_python_model /tmp/triton_python_model
 ADD requirements.txt /tmp/
 ADD setup.py /tmp/
