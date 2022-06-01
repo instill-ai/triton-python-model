@@ -1,5 +1,17 @@
 # Changelog
 
+### [0.2.2-alpha](https://github.com/instill-ai/triton-python-model/compare/v0.2.1-alpha...v0.2.2-alpha) (2022-06-01)
+
+
+### Bug Fixes
+
+* use refactored task label ([b0f93d4](https://github.com/instill-ai/triton-python-model/commit/b0f93d4043dfd0e07cc368f7f7a6045a6afefc60))
+
+
+### Miscellaneous Chores
+
+* release 0.2.2-alpha ([eea91c8](https://github.com/instill-ai/triton-python-model/commit/eea91c8b2d0dd191870a73bc1b42a9d49c4b24cf))
+
 ### [0.2.1-alpha](https://github.com/instill-ai/triton-python-model/compare/v0.2.0-alpha...v0.2.1-alpha) (2022-03-29)
 
 
