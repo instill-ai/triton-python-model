@@ -1,11 +1,11 @@
-FROM continuumio/miniconda3 AS build
+FROM --platform=$BUILDPLATFORM continuumio/miniconda3 AS build
 
 ARG PYTHONNOUSERSITE=True
 
-RUN conda create --name triton-conda-env python=3.8 scikit-learn pillow pytorch torchvision -c conda-forge -c pytorch
+RUN conda create --name triton-conda-env python=3.8 scikit-learn==1.1.1 pillow==9.1.1 pytorch==1.10.2 torchvision==0.8.2 -c conda-forge -c pytorch
 
 # Instill triton-python-model
-ARG TRITON_PYTHON_MODEL_VERSION=dev
+ARG TRITON_PYTHON_MODEL_VERSION
 ADD /triton_python_model /tmp/triton_python_model
 ADD requirements.txt /tmp/
 ADD setup.py /tmp/
@@ -20,7 +20,7 @@ RUN conda install conda-pack
 #  conda pack
 RUN conda pack -n triton-conda-env -o python-3-8.tar.gz
 
-FROM busybox AS runtime
+FROM busybox
 
 WORKDIR /conda-pack
 

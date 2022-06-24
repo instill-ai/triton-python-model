@@ -1,4 +1,4 @@
-FROM continuumio/miniconda3 AS build
+FROM --platform=$BUILDPLATFORM continuumio/miniconda3 AS build
 
 ARG PYTHONNOUSERSITE=True
 
@@ -20,7 +20,7 @@ RUN conda install conda-pack
 #  conda pack
 RUN conda pack -n triton-conda-env -o python-3-8.tar.gz
 
-FROM busybox AS runtime
+FROM busybox
 
 WORKDIR /conda-pack
 
