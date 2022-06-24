@@ -2,7 +2,7 @@ FROM continuumio/miniconda3 AS build
 
 ARG PYTHONNOUSERSITE=True
 
-RUN conda create --name triton-conda-env python=3.8 scikit-learn pillow pytorch torchvision cpuonly -c conda-forge -c pytorch
+RUN conda create --name triton-conda-env python=3.8 scikit-learn==1.1.1 pillow==9.1.1 pytorch==1.10.2 torchvision==0.8.2 cpuonly -c conda-forge -c pytorch
 
 # Instill triton-python-model
 ARG TRITON_PYTHON_MODEL_VERSION

@@ -7,9 +7,9 @@ From [Triton python backend](https://github.com/triton-inference-server/python_b
 > Python backend uses a stub process to connect your model.py file to the Triton C++ core. This stub process has an embedded Python interpreter with a fixed Python version.
 
 We maintain Dockerfiles for Instill AI's official [conda](https://docs.conda.io/en/latest/) environment for Triton python-backend. In the conda environment, we use Python 3.8 and install packages
-- [scikit-learn](https://github.com/scikit-learn/scikit-learn)
-- [Pillow](https://github.com/python-pillow/Pillow)
-- [PyTorch](https://github.com/pytorch/pytorch)
+- [scikit-learn==1.1.1](https://github.com/scikit-learn/scikit-learn)
+- [Pillow==9.1.1](https://github.com/python-pillow/Pillow)
+- [PyTorch==1.10.2](https://github.com/pytorch/pytorch)
 - triton-python-model
 
 ## License
