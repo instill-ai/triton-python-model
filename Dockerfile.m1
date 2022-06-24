@@ -2,7 +2,7 @@ FROM --platform=$BUILDPLATFORM continuumio/miniconda3 AS build
 
 ARG PYTHONNOUSERSITE=True
 
-RUN conda create --name triton-conda-env python=3.8 scikit-learn pytorch torchvision -c conda-forge -c pytorch
+RUN conda create --name triton-conda-env python=3.8 scikit-learn pytorch torchvision -c conda-forge -c pytorch-nightly
 
 # Instill triton-python-model
 ARG TRITON_PYTHON_MODEL_VERSION
