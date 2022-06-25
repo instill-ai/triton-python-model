@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.4-alpha](https://github.com/instill-ai/triton-python-model/compare/v0.2.3-alpha...v0.2.4-alpha) (2022-06-25)
+
+
+### Miscellaneous Chores
+
+* release 0.2.4-alpha ([d214b18](https://github.com/instill-ai/triton-python-model/commit/d214b1856ce4f12dfe7fa528d5844821131bc16f))
+
 ## [0.2.3-alpha](https://github.com/instill-ai/triton-python-model/compare/v0.2.2-alpha...v0.2.3-alpha) (2022-06-20)
 
 
