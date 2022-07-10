@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.2.5-alpha](https://github.com/instill-ai/triton-python-model/compare/v0.2.4-alpha...v0.2.5-alpha) (2022-07-10)
+
+
+### Bug Fixes
+
+* install compatible pytorch torchvision ([#14](https://github.com/instill-ai/triton-python-model/issues/14)) ([7a5eab4](https://github.com/instill-ai/triton-python-model/commit/7a5eab4142477c028ce3a50e66c21007d2fed2db))
+
+
+### Documentation
+
+* add transformers ([6fe715b](https://github.com/instill-ai/triton-python-model/commit/6fe715b47bd3a882823babb7692faad1ceb6617c))
+
 ## [0.2.4-alpha](https://github.com/instill-ai/triton-python-model/compare/v0.2.3-alpha...v0.2.4-alpha) (2022-06-25)
 
 
