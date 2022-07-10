@@ -11,6 +11,7 @@ We maintain Dockerfiles for Instill AI's official [conda](https://docs.conda.io/
 - [Pillow==9.1.1](https://github.com/python-pillow/Pillow)
 - [PyTorch==1.11.0](https://github.com/pytorch/pytorch)
 - [torchvision=0.12.0](https://pytorch.org/vision/stable/index.html)
+- [Transformers](https://github.com/huggingface/transformers)
 - triton-python-model
 
 Please read [here](https://github.com/pytorch/pytorch/wiki/PyTorch-Versions) for the PyTorch compatible domain libraries.
