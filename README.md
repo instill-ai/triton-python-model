@@ -9,8 +9,11 @@ From [Triton python backend](https://github.com/triton-inference-server/python_b
 We maintain Dockerfiles for Instill AI's official [conda](https://docs.conda.io/en/latest/) environment for Triton python-backend. In the conda environment, we use Python 3.8 and install packages
 - [scikit-learn==1.1.1](https://github.com/scikit-learn/scikit-learn)
 - [Pillow==9.1.1](https://github.com/python-pillow/Pillow)
-- [PyTorch==1.10.2](https://github.com/pytorch/pytorch)
+- [PyTorch==1.11.0](https://github.com/pytorch/pytorch)
+- [torchvision=0.12.0](https://pytorch.org/vision/stable/index.html)
 - triton-python-model
+
+Please read [here](https://github.com/pytorch/pytorch/wiki/PyTorch-Versions) for the PyTorch compatible domain libraries.
 
 ## License
 
