@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.6-alpha](https://github.com/instill-ai/triton-python-model/compare/v0.2.5-alpha...v0.2.6-alpha) (2022-07-21)
+
+
+### Bug Fixes
+
+* install triton_python_model in the docker image ([6e9fcd3](https://github.com/instill-ai/triton-python-model/commit/6e9fcd39ec567be51f4c243b30e7ea86e32c82fc))
+
 ## [0.2.5-alpha](https://github.com/instill-ai/triton-python-model/compare/v0.2.4-alpha...v0.2.5-alpha) (2022-07-10)
 
 
